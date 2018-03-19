@@ -1,3 +1,3 @@
 # MonthlyExpenser for Android
 
-Application to calculate your monthly expenses 
+Android application to calculate your monthly expenses 

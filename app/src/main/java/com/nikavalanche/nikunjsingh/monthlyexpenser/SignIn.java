@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
@@ -186,24 +187,50 @@ public class SignIn extends BaseActivity implements
         if (user != null) {
 
 
-            DatabaseReference userNameRef = df.child(user.getUid()).child("MonthlyEstimate");
+            DatabaseReference userNameRef = df.child(user.getUid());
+
+
+//            DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+            userNameRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    if (snapshot.hasChild("MonthlyEstimate")) {
+
+
+                        Intent myIntent = new Intent(SignIn.this, MainScreen.class);
+                        SignIn.this.startActivity(myIntent);
+
+
+                    } else {
+
+
+                        Intent myIntent = new Intent(SignIn.this, InputDetails.class);
+                        SignIn.this.startActivity(myIntent);
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
 
 
 
 
-
-            if ( ){
-
-                Intent myIntent = new Intent(SignIn.this, MainScreen.class);
-                SignIn.this.startActivity(myIntent);
-
-
-            } else {
-
-                Intent myIntent = new Intent(SignIn.this, InputDetails.class);
-                SignIn.this.startActivity(myIntent);
-
-            }
+//            if (  ){
+//
+//                Intent myIntent = new Intent(SignIn.this, MainScreen.class);
+//                SignIn.this.startActivity(myIntent);
+//
+//
+//            } else {
+//
+//                Intent myIntent = new Intent(SignIn.this, InputDetails.class);
+//                SignIn.this.startActivity(myIntent);
+//
+//            }
 
 
             mStatusTextView.setText(getString(R.string.google_status_fmt, user.getEmail()));

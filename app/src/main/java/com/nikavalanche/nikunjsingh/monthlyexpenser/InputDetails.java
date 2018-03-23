@@ -66,7 +66,7 @@ public class InputDetails extends AppCompatActivity implements
 
         String monthlyEstTxt = editTextMonthlyEst.getText().toString().trim();
 
-        InputDetailsPojo inputDetailsPojo = new InputDetailsPojo(monthlyEstTxt);
+//        InputDetailsPojo inputDetailsPojo = new InputDetailsPojo(monthlyEstTxt);
 
         FirebaseUser user = mAuth.getCurrentUser();
 

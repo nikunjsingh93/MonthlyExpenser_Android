@@ -17,13 +17,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".InputDetails" />
-        <activity android:name=".MainScreen">
-
-
-        </activity>
+        <activity android:name=".MainScreen" />
+        <activity android:name=".ListItems"></activity>
     </application>
 
 </manifest>

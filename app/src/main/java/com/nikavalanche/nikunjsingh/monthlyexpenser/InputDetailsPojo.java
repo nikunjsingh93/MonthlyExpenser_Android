@@ -8,11 +8,31 @@ package com.nikavalanche.nikunjsingh.monthlyexpenser;
 public class InputDetailsPojo {
 
 
- private String estimatedBudget;
+ private String reason;
+ private String money;
 
+    public InputDetailsPojo() {
+    }
 
-    public InputDetailsPojo(String estimatedBudget) {
-        this.estimatedBudget = estimatedBudget;
+    public InputDetailsPojo(String reason, String money) {
+        this.reason = reason;
+        this.money = money;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+    public String getMoney() {
+        return money;
+    }
+
+    public void setMoney(String money) {
+        this.money = money;
     }
 }
 

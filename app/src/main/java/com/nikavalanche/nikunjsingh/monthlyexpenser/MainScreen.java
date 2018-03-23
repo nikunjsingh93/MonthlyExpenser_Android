@@ -5,6 +5,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -16,6 +19,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+
+
 public class MainScreen extends AppCompatActivity implements
         View.OnClickListener {
 
@@ -24,12 +29,41 @@ public class MainScreen extends AppCompatActivity implements
 
     private DatabaseReference databaseReference;
 
+    private EditText editAddMEsp;
+
+    private EditText howMuch;
+
+    private Button addEspBtn;
+
+    private Button showPrev;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
+
+
+
+        editAddMEsp = (EditText) findViewById(R.id.addExpenseText);
+
+        howMuch = (EditText) findViewById(R.id.howMuchText);
+
+
+
+        addEspBtn = (Button) findViewById(R.id.add);
+
+        addEspBtn.setOnClickListener(this);
+
+
+        showPrev = (Button) findViewById(R.id.showPrev);
+
+        showPrev.setOnClickListener(this);
+
+
 
 
         findViewById(R.id.sign_out_button).setOnClickListener(this);
@@ -48,6 +82,40 @@ public class MainScreen extends AppCompatActivity implements
 
 
     }
+
+
+
+    private void addExpense() {
+
+        String addexp = editAddMEsp.getText().toString().trim();
+
+        String howMuchTemp = howMuch.getText().toString().trim();
+
+        FirebaseUser user = mAuth.getCurrentUser();
+
+
+        DatabaseReference postsRef = databaseReference.child(user.getUid()).child("AllExpenses");
+
+
+        postsRef.push().setValue(new InputDetailsPojo(addexp, howMuchTemp));
+
+
+        Toast.makeText(this,"Information Added", Toast.LENGTH_SHORT).show();
+
+
+    }
+
+
+
+    private void goToList() {
+
+        Intent myIntent = new Intent(MainScreen.this, ListItems.class);
+        MainScreen.this.startActivity(myIntent);
+
+    }
+
+
+
 
     private void updateUI(FirebaseUser user) {
 
@@ -76,6 +144,10 @@ public class MainScreen extends AppCompatActivity implements
         int i = v.getId();
         if (i == R.id.sign_out_button) {
             signOut();
+        } else if (v == addEspBtn) {
+            addExpense();
+        } else if (v == showPrev) {
+            goToList();
         }
     }
 

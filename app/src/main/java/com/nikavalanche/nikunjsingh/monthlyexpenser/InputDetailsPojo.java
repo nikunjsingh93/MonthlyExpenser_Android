@@ -10,17 +10,27 @@ public class InputDetailsPojo {
 
  private String reason;
  private String money;
+ private String dateTime;
 
     public InputDetailsPojo() {
     }
 
-    public InputDetailsPojo(String reason, String money) {
+    public InputDetailsPojo(String reason, String money, String dateTime) {
         this.reason = reason;
         this.money = money;
+        this.dateTime = dateTime;
     }
 
     public String getReason() {
         return reason;
+    }
+
+    public String getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
     }
 
     public void setReason(String reason) {

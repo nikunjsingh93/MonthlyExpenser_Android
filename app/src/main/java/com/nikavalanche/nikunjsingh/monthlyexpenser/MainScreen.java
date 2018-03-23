@@ -19,6 +19,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class MainScreen extends AppCompatActivity implements
@@ -94,10 +97,22 @@ public class MainScreen extends AppCompatActivity implements
         FirebaseUser user = mAuth.getCurrentUser();
 
 
+
+        Date todaysDate = new Date();
+
+        DateFormat formattedDate = new SimpleDateFormat("E, MMM dd yyyy, KK:mm a");
+
+        String DateTimeInString = formattedDate.format(todaysDate);
+
+
+
+
+
+
         DatabaseReference postsRef = databaseReference.child(user.getUid()).child("AllExpenses");
 
 
-        postsRef.push().setValue(new InputDetailsPojo(addexp, howMuchTemp));
+        postsRef.push().setValue(new InputDetailsPojo(addexp, howMuchTemp,DateTimeInString));
 
 
         Toast.makeText(this,"Information Added", Toast.LENGTH_SHORT).show();

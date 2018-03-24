@@ -66,13 +66,15 @@ public class InputDetails extends AppCompatActivity implements
 
         String monthlyEstTxt = editTextMonthlyEst.getText().toString().trim();
 
-//        InputDetailsPojo inputDetailsPojo = new InputDetailsPojo(monthlyEstTxt);
 
         FirebaseUser user = mAuth.getCurrentUser();
 
-        databaseReference.child(user.getUid()).child("MonthlyEstimate").setValue(monthlyEstTxt);
+        databaseReference.child(user.getUid()).child("MonthlyEstimate").child("MonthlyEstimate").setValue(monthlyEstTxt);
 
       Toast.makeText(this,"Information Saved", Toast.LENGTH_SHORT).show();
+
+        Intent myIntent = new Intent(InputDetails.this, MainScreen.class);
+        InputDetails.this.startActivity(myIntent);
 
 
     }

@@ -80,7 +80,7 @@ public class ListItems extends AppCompatActivity  implements
                 InputDetailsPojo post = dataSnapshot.getValue(InputDetailsPojo.class);
 
 
-                userArrayList.add("Spent On: " + post.getReason()+ "  &  " + "Amount: " + post.getMoney()+ "$");
+                userArrayList.add(post.getReason()+ "\n" + post.getDateTime()+"\n"+ post.getMoney()+"$");
 
                 arrayAdapter.notifyDataSetChanged();
 

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -16,11 +17,16 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -40,6 +46,21 @@ public class MainScreen extends AppCompatActivity implements
 
     private Button showPrev;
 
+    private TextView amountRem;
+
+    private TextView MonthlyLimitTextView;
+
+    private TextView amountRemToSpend;
+
+    private Double temp1;
+
+    private Double temp2;
+
+
+
+
+    private ArrayList<Double> allAmounts = new ArrayList<>();
+
 
 
     @Override
@@ -51,9 +72,17 @@ public class MainScreen extends AppCompatActivity implements
 
 
 
+
         editAddMEsp = (EditText) findViewById(R.id.addExpenseText);
 
         howMuch = (EditText) findViewById(R.id.howMuchText);
+
+
+        amountRem = (TextView) findViewById(R.id.amountRem);
+
+        MonthlyLimitTextView = (TextView) findViewById(R.id.MonthlyLimitText);
+
+        amountRemToSpend = (TextView) findViewById(R.id.amountRemToSpend);
 
 
 
@@ -84,8 +113,146 @@ public class MainScreen extends AppCompatActivity implements
         // [END initialize_auth]
 
 
+
+        FirebaseUser user = mAuth.getCurrentUser();
+
+
+        DatabaseReference mLimit = databaseReference.child(user.getUid()).child("MonthlyEstimate");
+
+
+//       String tp= mLimit.getKey();
+//
+//
+//        MonthlyLimitTextView.setText(tp);
+
+
+
+        DatabaseReference dbList = databaseReference.child(user.getUid()).child("AllExpenses");
+
+
+
+
+        mLimit.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+                MonthlyEstimatePojo post = dataSnapshot.getValue(MonthlyEstimatePojo.class);
+
+                MonthlyLimitTextView.setText(post.getMonthlyEstimate());
+
+                temp1 = Double.parseDouble(post.getMonthlyEstimate());
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+//        mLimit.addChildEventListener(new ChildEventListener() {
+//            @Override
+//            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+//
+//
+//
+//                MonthlyEstimatePojo post = dataSnapshot.getValue(MonthlyEstimatePojo.class);
+//
+//
+//                MonthlyLimitTextView.setText(post.getMonthlyEstimate());
+//
+//            }
+//
+//            @Override
+//            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+//
+//            }
+//
+//            @Override
+//            public void onChildRemoved(DataSnapshot dataSnapshot) {
+//
+//            }
+//
+//            @Override
+//            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+
+
+        dbList.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+
+
+                InputDetailsPojo post = dataSnapshot.getValue(InputDetailsPojo.class);
+
+
+                allAmounts.add(Double.parseDouble(post.getMoney()));
+
+
+                Double sum = 0.0;
+                for(Double d : allAmounts) {
+                    sum += d;
+                }
+
+
+                amountRem.setText(sum.toString());
+
+                temp2 = Double.parseDouble(sum.toString());
+
+                amountRemFunc();
+
+
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
+
+
     }
 
+
+    private void amountRemFunc() {
+
+        Double temp3 = temp1 - temp2;
+
+        amountRemToSpend.setText(temp3.toString());
+
+
+    }
 
 
     private void addExpense() {
@@ -106,9 +273,6 @@ public class MainScreen extends AppCompatActivity implements
 
 
 
-
-
-
         DatabaseReference postsRef = databaseReference.child(user.getUid()).child("AllExpenses");
 
 
@@ -119,6 +283,18 @@ public class MainScreen extends AppCompatActivity implements
 
 
     }
+
+
+    private void amountRemaining() {
+
+
+
+
+
+
+
+    }
+
 
 
 

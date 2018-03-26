@@ -120,11 +120,6 @@ public class MainScreen extends AppCompatActivity implements
         DatabaseReference mLimit = databaseReference.child(user.getUid()).child("MonthlyEstimate");
 
 
-//       String tp= mLimit.getKey();
-//
-//
-//        MonthlyLimitTextView.setText(tp);
-
 
 
         DatabaseReference dbList = databaseReference.child(user.getUid()).child("AllExpenses");
@@ -153,39 +148,7 @@ public class MainScreen extends AppCompatActivity implements
         });
 
 
-//        mLimit.addChildEventListener(new ChildEventListener() {
-//            @Override
-//            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-//
-//
-//
-//                MonthlyEstimatePojo post = dataSnapshot.getValue(MonthlyEstimatePojo.class);
-//
-//
-//                MonthlyLimitTextView.setText(post.getMonthlyEstimate());
-//
-//            }
-//
-//            @Override
-//            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-//
-//            }
-//
-//            @Override
-//            public void onChildRemoved(DataSnapshot dataSnapshot) {
-//
-//            }
-//
-//            @Override
-//            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
+
 
 
         dbList.addChildEventListener(new ChildEventListener() {
@@ -275,25 +238,27 @@ public class MainScreen extends AppCompatActivity implements
 
         DatabaseReference postsRef = databaseReference.child(user.getUid()).child("AllExpenses");
 
+        if(addexp.equalsIgnoreCase("") || howMuchTemp.equalsIgnoreCase("")) {
 
-        postsRef.push().setValue(new InputDetailsPojo(addexp, howMuchTemp,DateTimeInString));
+            Toast.makeText(this,"Please Enter All Details", Toast.LENGTH_SHORT).show();
 
 
-        Toast.makeText(this,"Information Added", Toast.LENGTH_SHORT).show();
+        } else {
+
+
+
+            postsRef.push().setValue(new InputDetailsPojo(addexp, howMuchTemp,DateTimeInString));
+
+
+            Toast.makeText(this,"Information Added", Toast.LENGTH_SHORT).show();
+
+        }
+
+
 
 
     }
 
-
-    private void amountRemaining() {
-
-
-
-
-
-
-
-    }
 
 
 

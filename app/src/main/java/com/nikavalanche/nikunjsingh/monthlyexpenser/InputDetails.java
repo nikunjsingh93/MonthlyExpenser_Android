@@ -69,12 +69,33 @@ public class InputDetails extends AppCompatActivity implements
 
         FirebaseUser user = mAuth.getCurrentUser();
 
-        databaseReference.child(user.getUid()).child("MonthlyEstimate").child("MonthlyEstimate").setValue(monthlyEstTxt);
 
-      Toast.makeText(this,"Information Saved", Toast.LENGTH_SHORT).show();
 
-        Intent myIntent = new Intent(InputDetails.this, MainScreen.class);
-        InputDetails.this.startActivity(myIntent);
+        DatabaseReference postsRef = databaseReference.child(user.getUid()).child("MonthlyEstimate");
+
+
+        if(monthlyEstTxt.equalsIgnoreCase("")) {
+
+
+
+            Toast.makeText(this,"Please Enter Detail", Toast.LENGTH_SHORT).show();
+
+
+        } else {
+
+
+            postsRef.setValue(new MonthlyEstimatePojo(monthlyEstTxt));
+
+
+            Toast.makeText(this,"Information Added", Toast.LENGTH_SHORT).show();
+
+
+            Intent myIntent = new Intent(InputDetails.this, MainScreen.class);
+            InputDetails.this.startActivity(myIntent);
+
+        }
+
+
 
 
     }
@@ -108,7 +129,7 @@ public class InputDetails extends AppCompatActivity implements
             signOut();
         } else if (v == continueMontlyEst) {
             saveMonthlyEst();
-//            Toast.makeText(this,"Here", Toast.LENGTH_SHORT).show();
+
         }
     }
 

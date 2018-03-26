@@ -218,21 +218,6 @@ public class SignIn extends BaseActivity implements
 
 
 
-
-//            if (  ){
-//
-//                Intent myIntent = new Intent(SignIn.this, MainScreen.class);
-//                SignIn.this.startActivity(myIntent);
-//
-//
-//            } else {
-//
-//                Intent myIntent = new Intent(SignIn.this, InputDetails.class);
-//                SignIn.this.startActivity(myIntent);
-//
-//            }
-
-
             mStatusTextView.setText(getString(R.string.google_status_fmt, user.getEmail()));
             mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
 

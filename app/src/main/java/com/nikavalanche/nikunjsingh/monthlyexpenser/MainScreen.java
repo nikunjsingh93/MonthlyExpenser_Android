@@ -240,17 +240,18 @@ public class MainScreen extends AppCompatActivity implements
 
         if(addexp.equalsIgnoreCase("") || howMuchTemp.equalsIgnoreCase("")) {
 
+
+
             Toast.makeText(this,"Please Enter All Details", Toast.LENGTH_SHORT).show();
 
 
         } else {
 
 
+                postsRef.push().setValue(new InputDetailsPojo(addexp, howMuchTemp,DateTimeInString));
 
-            postsRef.push().setValue(new InputDetailsPojo(addexp, howMuchTemp,DateTimeInString));
 
-
-            Toast.makeText(this,"Information Added", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Information Added", Toast.LENGTH_SHORT).show();
 
         }
 

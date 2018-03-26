@@ -20,7 +20,9 @@
         </activity>
         <activity android:name=".InputDetails" />
         <activity android:name=".MainScreen" />
-        <activity android:name=".ListItems"></activity>
+        <activity android:name=".ListItems" />
+        <activity android:name=".Settings" />
+        <activity android:name=".ChangeLimit"></activity>
     </application>
 
 </manifest>

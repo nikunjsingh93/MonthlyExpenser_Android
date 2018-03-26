@@ -44,13 +44,23 @@ public class SignIn extends BaseActivity implements
     private TextView mStatusTextView;
     private TextView mDetailTextView;
 
+
+    static boolean calledAlready = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
 
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+
+        if (!calledAlready)
+        {
+            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+            calledAlready = true;
+        }
+
+
 
 
         // Views

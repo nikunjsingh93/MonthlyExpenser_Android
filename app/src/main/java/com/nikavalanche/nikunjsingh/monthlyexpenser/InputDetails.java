@@ -36,6 +36,11 @@ public class InputDetails extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_details);
 
+
+
+
+
+
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
         editTextMonthlyEst = (EditText) findViewById(R.id.editTextMonthlyEst);

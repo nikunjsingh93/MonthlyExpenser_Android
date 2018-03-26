@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -70,7 +71,19 @@ public class MainScreen extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
 
+
+
+//        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+
+
+
+
+
         databaseReference = FirebaseDatabase.getInstance().getReference();
+
+
+
+
 
 
 
@@ -291,11 +304,12 @@ public class MainScreen extends AppCompatActivity implements
 
 
 
+                Intent myIntent = new Intent(MainScreen.this, Settings.class);
+                MainScreen.this.startActivity(myIntent);
 
 
 
-
-            break;
+                break;
 
 
         }
@@ -338,6 +352,7 @@ public class MainScreen extends AppCompatActivity implements
                         updateUI(null);
                     }
                 });
+
     }
 
 

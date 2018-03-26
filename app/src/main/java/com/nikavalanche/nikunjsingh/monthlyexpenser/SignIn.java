@@ -50,6 +50,8 @@ public class SignIn extends BaseActivity implements
         setContentView(R.layout.activity_sign_in);
 
 
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+
 
         // Views
         mStatusTextView = findViewById(R.id.status);
@@ -185,6 +187,7 @@ public class SignIn extends BaseActivity implements
     private void updateUI(FirebaseUser user) {
         hideProgressDialog();
         if (user != null) {
+
 
 
             DatabaseReference userNameRef = df.child(user.getUid());

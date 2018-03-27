@@ -6,11 +6,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+
 public class Settings extends AppCompatActivity implements
         View.OnClickListener {
 
 
     private Button goTo;
+
+    private Button viewAll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +29,12 @@ public class Settings extends AppCompatActivity implements
 
 
 
+        viewAll = (Button) findViewById(R.id.viewallbtn);
+
+        viewAll.setOnClickListener(this);
+
+
+
     }
 
 
@@ -33,7 +43,9 @@ public class Settings extends AppCompatActivity implements
         int i = v.getId();
        if (v == goTo) {
            gotoFunc();
-        }
+        } else if (v == viewAll) {
+           viewAllDataFunc();
+       }
     }
 
 
@@ -45,6 +57,23 @@ public class Settings extends AppCompatActivity implements
         Intent myIntent = new Intent(Settings.this, ChangeLimit.class);
         Settings.this.startActivity(myIntent);
 
+
+    }
+
+
+
+    private void viewAllDataFunc() {
+
+
+        Bundle bundle = getIntent().getExtras();
+        ArrayList<String> array = bundle.getStringArrayList("array");
+
+
+
+        Intent myIntent = new Intent(Settings.this, ViewAll.class);
+
+        myIntent.putExtra("array", array);
+        Settings.this.startActivity(myIntent);
 
 
 

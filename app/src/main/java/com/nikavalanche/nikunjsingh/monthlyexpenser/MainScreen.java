@@ -65,6 +65,12 @@ public class MainScreen extends AppCompatActivity implements
     private ArrayList<Double> allAmounts = new ArrayList<>();
 
 
+    private InputDetailsPojo post;
+
+
+    public ArrayList<String> userArrayList = new ArrayList<>();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,16 +79,18 @@ public class MainScreen extends AppCompatActivity implements
 
 
 
-//        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
 
+
+//
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        getSupportActionBar().setLogo(R.drawable.);
+//        getSupportActionBar().setDisplayUseLogoEnabled(true);
+//
 
 
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
-
-
-
 
 
 
@@ -113,7 +121,7 @@ public class MainScreen extends AppCompatActivity implements
 
 
 
-        findViewById(R.id.sign_out_button).setOnClickListener(this);
+//        findViewById(R.id.sign_out_button).setOnClickListener(this);
 
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -132,12 +140,11 @@ public class MainScreen extends AppCompatActivity implements
         FirebaseUser user = mAuth.getCurrentUser();
 
 
+
+
         DatabaseReference mLimit = databaseReference.child(user.getUid()).child("MonthlyEstimate");
 
 
-
-
-        DatabaseReference dbList = databaseReference.child(user.getUid()).child("AllExpenses");
 
 
 
@@ -148,6 +155,13 @@ public class MainScreen extends AppCompatActivity implements
 
 
                 MonthlyEstimatePojo post = dataSnapshot.getValue(MonthlyEstimatePojo.class);
+
+
+                userArrayList.add("Monthly Estimate:" + post.getMonthlyEstimate());
+
+
+                userArrayList.add("Your Spending List:");
+
 
                 MonthlyLimitTextView.setText(post.getMonthlyEstimate());
 
@@ -166,6 +180,16 @@ public class MainScreen extends AppCompatActivity implements
 
 
 
+
+
+        DatabaseReference dbList = databaseReference.child(user.getUid()).child("AllExpenses");
+
+
+
+
+
+
+
         dbList.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -173,6 +197,15 @@ public class MainScreen extends AppCompatActivity implements
 
 
                 InputDetailsPojo post = dataSnapshot.getValue(InputDetailsPojo.class);
+
+
+
+
+
+                userArrayList.add(post.getReason()+ "\n" + post.getDateTime()+"\n"+ post.getMoney()+"$");
+
+
+
 
 
                 allAmounts.add(Double.parseDouble(post.getMoney()));
@@ -185,6 +218,8 @@ public class MainScreen extends AppCompatActivity implements
 
 
                 amountRem.setText(sum.toString());
+
+                userArrayList.add("Amount Spent:" + sum.toString()+"$");
 
                 temp2 = Double.parseDouble(sum.toString());
 
@@ -229,6 +264,8 @@ public class MainScreen extends AppCompatActivity implements
 
         amountRemToSpend.setText(temp3.toString());
 
+        userArrayList.add("Amount that was remaining to spend:" + temp3.toString()+"$");
+
 
     }
 
@@ -268,6 +305,9 @@ public class MainScreen extends AppCompatActivity implements
 
                 Toast.makeText(this,"Information Added", Toast.LENGTH_SHORT).show();
 
+            editAddMEsp.setText("");
+            howMuch.setText("");
+
         }
 
 
@@ -302,10 +342,21 @@ public class MainScreen extends AppCompatActivity implements
 
             case R.id.action_settings:
 
-
-
                 Intent myIntent = new Intent(MainScreen.this, Settings.class);
+
+                myIntent.putExtra("array", userArrayList);
                 MainScreen.this.startActivity(myIntent);
+
+
+
+                break;
+
+            case R.id.action_signout:
+
+
+
+                signOut();
+
 
 
 
@@ -358,9 +409,7 @@ public class MainScreen extends AppCompatActivity implements
 
     public void onClick(View v) {
         int i = v.getId();
-        if (i == R.id.sign_out_button) {
-            signOut();
-        } else if (v == addEspBtn) {
+       if (v == addEspBtn) {
             addExpense();
         } else if (v == showPrev) {
             goToList();

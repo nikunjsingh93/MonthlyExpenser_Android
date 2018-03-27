@@ -7,21 +7,11 @@
     tools:context="com.nikavalanche.nikunjsingh.monthlyexpenser.MainScreen"
     tools:layout_editor_absoluteY="81dp">
 
-    <Button
-        android:id="@+id/sign_out_button"
-        android:layout_width="88dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="@string/sign_out"
-        android:theme="@style/ThemeOverlay.MyDarkButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <EditText
         android:id="@+id/addExpenseText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="26dp"
+        android:layout_marginBottom="36dp"
         android:layout_marginStart="4dp"
         android:ems="10"
         android:hint="Where did you spend?"
@@ -43,7 +33,7 @@
         android:id="@+id/showPrev"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="13dp"
+        android:layout_marginBottom="19dp"
         android:layout_marginEnd="2dp"
         android:layout_marginStart="2dp"
         android:text="Show Previous Amounts"
@@ -55,18 +45,18 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="44dp"
         android:layout_marginStart="37dp"
         android:text="Expense Amount (in $):"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/howMuchText"
+        app:layout_constraintBottom_toBottomOf="@+id/howMuchText"
         app:layout_constraintStart_toStartOf="@+id/howMuchText" />
 
     <EditText
         android:id="@+id/howMuchText"
         android:layout_width="223dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="191dp"
+        android:layout_marginBottom="197dp"
         android:ems="10"
         android:hint="How much did you spend?"
         android:inputType="numberDecimal"
@@ -78,7 +68,6 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
         android:text="Expense Title:"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/addExpenseText"
@@ -89,55 +78,74 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:text="Amount Spent:"
-        app:layout_constraintBottom_toTopOf="@+id/textView7"
-        app:layout_constraintStart_toStartOf="@+id/textView6" />
+        android:layout_marginTop="35dp"
+        android:text="Amount Spent ($):"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <TextView
         android:id="@+id/amountRem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="31dp"
         android:text="num"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/MonthlyLimitText"
         app:layout_constraintTop_toBottomOf="@+id/MonthlyLimitText" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="33dp"
-        android:layout_marginTop="45dp"
-        android:text="Monthly Limit:"
-        app:layout_constraintStart_toEndOf="@+id/sign_out_button"
-        app:layout_constraintTop_toBottomOf="@+id/sign_out_button" />
+        android:layout_height="0dp"
+        android:layout_marginStart="72dp"
+        android:text="Monthly Limit ($):"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/MonthlyLimitText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/MonthlyLimitText" />
 
     <TextView
         android:id="@+id/MonthlyLimitText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
+        android:layout_marginTop="42dp"
         android:text="num"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toTopOf="@+id/textView6" />
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/amountRemToSpend"
+        app:layout_constraintStart_toStartOf="@+id/amountRemToSpend"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
-        android:layout_height="19dp"
-        android:text="Amount Remaining:"
-        app:layout_constraintBaseline_toBaselineOf="@+id/amountRemToSpend"
-        app:layout_constraintStart_toStartOf="@+id/textView5" />
+        android:layout_height="28dp"
+        android:layout_marginBottom="119dp"
+        android:layout_marginEnd="65dp"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="118dp"
+        android:text="Amount Remaining ($):"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/addExpenseText"
+        app:layout_constraintEnd_toEndOf="@+id/howMuchText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView6" />
 
     <TextView
         android:id="@+id/amountRemToSpend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="25dp"
         android:text="num"
-        app:layout_constraintStart_toStartOf="@+id/amountRem"
-        app:layout_constraintTop_toBottomOf="@+id/amountRem" />
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView7"
+        app:layout_constraintStart_toEndOf="@+id/textView7" />
 
 
 </android.support.constraint.ConstraintLayout>

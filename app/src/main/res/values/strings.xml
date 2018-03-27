@@ -85,4 +85,8 @@
     <string name="tab_text_1">Add Expense</string>
     <string name="tab_text_2">Show Expenses</string>
     <string name="tab_text_3">Tab 3</string>
+
+    <string name="madewith"> Made with ♥ by Nikunj Singh</string>
+
+
 </resources>

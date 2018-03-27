@@ -26,6 +26,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * Nikunj Singh : MonthlyExpenser
  */
@@ -42,7 +46,7 @@ public class SignIn extends BaseActivity implements
 
     private GoogleSignInClient mGoogleSignInClient;
     private TextView mStatusTextView;
-    private TextView mDetailTextView;
+//    private TextView mDetailTextView;
 
 
     static boolean calledAlready = false;
@@ -62,17 +66,16 @@ public class SignIn extends BaseActivity implements
 
 
 
-
         // Views
         mStatusTextView = findViewById(R.id.status);
-        mDetailTextView = findViewById(R.id.detail);
+//        mDetailTextView = findViewById(R.id.detail);
 
         df = FirebaseDatabase.getInstance().getReference();
 
         // Button listeners
         findViewById(R.id.sign_in_button).setOnClickListener(this);
         findViewById(R.id.sign_out_button).setOnClickListener(this);
-        findViewById(R.id.disconnect_button).setOnClickListener(this);
+//        findViewById(R.id.disconnect_button).setOnClickListener(this);
 
         // [START config_signin]
         // Configure Google Sign In
@@ -92,6 +95,7 @@ public class SignIn extends BaseActivity implements
     // [START on_start_check_user]
     @Override
     public void onStart() {
+
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -230,20 +234,27 @@ public class SignIn extends BaseActivity implements
             });
 
 
-
             mStatusTextView.setText(getString(R.string.google_status_fmt, user.getEmail()));
-            mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
+//            mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
 
             findViewById(R.id.sign_in_button).setVisibility(View.GONE);
             findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
         } else {
             mStatusTextView.setText(R.string.signed_out);
-            mDetailTextView.setText(null);
+//            mDetailTextView.setText(null);
 
             findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
             findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
         }
     }
+
+    private void refreshMonth() {
+
+
+
+    }
+
+
 
     @Override
     public void onClick(View v) {
@@ -252,8 +263,6 @@ public class SignIn extends BaseActivity implements
             signIn();
         } else if (i == R.id.sign_out_button) {
             signOut();
-        } else if (i == R.id.disconnect_button) {
-            revokeAccess();
         }
     }
 }

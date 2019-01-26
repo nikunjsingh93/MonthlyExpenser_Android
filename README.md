@@ -1,6 +1,8 @@
 # MonthlyExpenser for Android
 Android application to calculate your monthly expenses. Using Firebase as Backend. Created using Android Studio. Has offline capability, all data is synced realtime to Firebase using Google Email.
 
+# Google Play Store link: https://play.google.com/store/apps/details?id=com.nikavalanche.nikunjsingh.monthlyexpenser
+
 # Screenshots:
 
 ![screenshot_20180415-200359_monthlyexpenser](https://user-images.githubusercontent.com/31995471/38785033-53e1be80-40e8-11e8-8afb-43f14ea5bf4d.jpg)
